@@ -32,6 +32,7 @@ import FieldInput from "@/components/organisms/FieldInput";
 import { JOBTYPES } from "@/constants";
 import InputSkills from '@/components/organisms/InputSkills';
 import CKEditor from '@/components/organisms/CKEditor';
+import InputBenefits from '@/components/organisms/InputBenefits';
 
 interface PostJobProps {
 
@@ -198,6 +199,11 @@ const PostJob: FC<PostJobProps> = ({ }) => {
           {/* Nice-To-Haves */}
           <FieldInput title="Nice-To-Haves" subtitle="Add nice-to-have skills and qualifications for the role to encourage a more diverse set of candidates to apply">
             <CKEditor form={form} name="niceToHaves" editorLoaded={editorLoaded} />
+          </FieldInput>
+
+          {/* Benefits */}
+          <FieldInput title="Perks and Benefits" subtitle="Encourage more people to apply by sharing the attractive rewards and benefits you offer your employees">
+            <InputBenefits form={form} />
           </FieldInput>
 
         </form>
