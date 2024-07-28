@@ -4,12 +4,12 @@ import {z} from 'zod'
 export const jobFormSchema = z.object({
   roles: z
     .string({ required_error: 'Job Title is required' })
-    .min(3, { message: 'Job Title must me at least 3 characters' }),
+    .min(80, { message: 'Job Title must me at least 80 characters' }),
   jobType: z.enum(JOBTYPES, {
     required_error: 'You need to select a job type'
   }),
-  salayFrom: z.string({ required_error: 'Salary From is required' }),
-  salayTo: z.string({ required_error: 'Salary To is required' }),
+  salaryFrom: z.string({ required_error: 'Salary From is required' }),
+  salaryTo: z.string({ required_error: 'Salary To is required' }),
   categoryId: z.string({ required_error: 'You need to select a categor' }),
   requiredSkills: z
     .string()

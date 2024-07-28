@@ -1,7 +1,7 @@
 "use client"
 
 import { Form } from "@/components/ui/form";
-import { Separator } from "@radix-ui/react-separator";
+import { Separator } from '@/components/ui/separator';
 import React, { FC, ReactNode } from "react";
 
 interface FieldInputProps {
@@ -13,7 +13,6 @@ interface FieldInputProps {
 const FieldInput: FC<FieldInputProps> = ({ children, subtitle, title }) => {
   return (
     <>
-
       <div className="flex flex-row items-start">
         <div className="w-[35%]">
           <div className="font-semibold">{ title }</div>
