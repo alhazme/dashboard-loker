@@ -1,10 +1,18 @@
+"use client"
+
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { FC } from "react";
 
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = ({}) => {
+
+  const router = useRouter()
+
+  const navCreateJobPage = () => router.push('/post-a-job')
+
   return (
     <div className="pb-3 mb-8 border-b flex flex-row items-center justify-between">
       <div>
@@ -12,7 +20,7 @@ const Header: FC<HeaderProps> = ({}) => {
         <div className="font-semibold">Twitter</div>
       </div>
       <div>
-        <Button className="rounded-none px-3 py-6">
+        <Button className="rounded-none px-3 py-6" onClick={navCreateJobPage}>
           <PlusIcon className="mr-2 w-4 h-4" />
           Post a job
         </Button>
