@@ -1,16 +1,16 @@
-import { BENEFITS } from "@/constants";
 import { benefitType } from "@/constants/types";
 import React, { FC, useState } from "react";
 import DialogAddBenefit from "./DialogAddBenefit";
 import { FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { PartyPopper, X } from "lucide-react";
+import { BENEFITS } from "@/constants";
 
 interface InputBenefitsProps {
 	form: any;
 }
 
 const InputBenefits: FC<InputBenefitsProps> = ({ form }) => {
-	const [benefits, setBenefits] = useState<benefitType[]>(BENEFITS);
+	const [benefits, setBenefits] = useState<benefitType[]>([]);
 
 	const deleteBenefit = (item: benefitType) => {
 		const deletedBenefits = benefits.filter(
@@ -28,12 +28,12 @@ const InputBenefits: FC<InputBenefitsProps> = ({ form }) => {
 	};
 
 	return (
-		<>
+		<div className="block">
 			<DialogAddBenefit updateBenefits={updateBenefits} />
 			<div className="grid grid-cols-3 gap-5 mt-5">
 				{benefits.map((item: benefitType, i: number) => (
 					<div
-						className="border border-gray-200 rounded-sm p-3 relative"
+						className="border border-gray-200 rounded-sm p-3 relative w-[200px]"
 						key={i}
 					>
 						<PartyPopper className="w-7 h-7 mb-5 text-primary" />
@@ -48,21 +48,21 @@ const InputBenefits: FC<InputBenefitsProps> = ({ form }) => {
 						<div className="text-xl font-semibold mb-3">
 							{item.benefit}
 						</div>
-						<div className="text-gray-500 text-sm">{item.desc}</div>
+						<div className="text-gray-500 text-sm">{ item.description }</div>
 					</div>
 				))}
 			</div>
 
 			<FormField
 				control={form.control}
-				name="benefits"
+				name={'benefits'}
 				render={({ field }) => (
 					<FormItem>
 						<FormMessage />
 					</FormItem>
 				)}
 			/>
-		</>
+		</div>
 	);
 };
 

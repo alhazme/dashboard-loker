@@ -33,6 +33,7 @@ import { JOBTYPES } from "@/constants";
 import InputSkills from '@/components/organisms/InputSkills';
 import CKEditor from '@/components/organisms/CKEditor';
 import InputBenefits from '@/components/organisms/InputBenefits';
+import { Button } from '@/components/ui/button';
 
 interface PostJobProps {
 
@@ -92,7 +93,7 @@ const PostJob: FC<PostJobProps> = ({ }) => {
           <FieldInput title="Type of Employment" subtitle="You can select multiple type of employment">
             <FormField
               control={form.control}
-              name="type"
+              name="jobType"
               render={({ field }) => (
                 <FormItem className="space-y-3">
                   <FormControl>
@@ -106,7 +107,7 @@ const PostJob: FC<PostJobProps> = ({ }) => {
                           <FormControl>
                             <RadioGroupItem value={item} />
                           </FormControl>
-                          <FormLabel class="font-normal">{item}</FormLabel>
+                          <FormLabel className="font-normal">{item}</FormLabel>
                         </FormItem>
                       ))}
                     </RadioGroup>
@@ -206,6 +207,9 @@ const PostJob: FC<PostJobProps> = ({ }) => {
             <InputBenefits form={form} />
           </FieldInput>
 
+          <div className='flex justify-end'>
+            <Button size='lg'>Do a Review</Button>
+          </div>
         </form>
       </Form>
     </div>

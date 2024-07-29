@@ -1,4 +1,4 @@
 export type benefitType = {
 	benefit: string;
-	desc: string;
+	description: string;
 };

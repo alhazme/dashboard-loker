@@ -10,7 +10,7 @@ export const jobFormSchema = z.object({
   }),
   salaryFrom: z.string({ required_error: 'Salary From is required' }),
   salaryTo: z.string({ required_error: 'Salary To is required' }),
-  categoryId: z.string({ required_error: 'You need to select a categor' }),
+  categoryId: z.string({ required_error: 'You need to select a category' }),
   requiredSkills: z
     .string()
     .array()
@@ -27,8 +27,11 @@ export const jobFormSchema = z.object({
   niceToHaves: z
     .string({ required_error: 'Nice to Haves is required' })
     .min(10, { message: 'Nice to Haves must be at least 3 characters' }),
-  benefits: z.object({
-    benefit: z.string(),
-    description: z.string()
-  }).array().nonempty({ message: 'Benefits must be at least 1 benefit'})
+  benefits: z
+		.object({
+			benefit: z.string(),
+			description: z.string(),
+		})
+		.array()
+		.nonempty({ message: "Benefits must be at least 1 benefit" }),
 })

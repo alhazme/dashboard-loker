@@ -42,7 +42,7 @@ const InputSkills: FC<InputSkillsProps> = ({ form }) => {
   return (
     <FormField
       control={form.control}
-      name='requiredSkills'
+      name={'requiredSkills'}
       render={({ field }) => (
         <FormItem>
           <FormLabel className='block'>Add Skills</FormLabel>
@@ -70,6 +70,7 @@ const InputSkills: FC<InputSkillsProps> = ({ form }) => {
               </div>
             </>
           </FormControl>
+          <FormMessage />
         </FormItem>
       )}></FormField>
   );
