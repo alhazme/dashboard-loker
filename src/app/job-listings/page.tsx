@@ -48,12 +48,11 @@ const JobListingsPage: FC<JobListingsPageProps> = ({  }) => {
                 <TableCell>{ item.applicants } / { item.needs }</TableCell>
                 <TableCell>
                   <Button size='icon' variant='outline'>
-                    <MoreVertical />
+                    <MoreVertical className='w-4 h-4' />
                   </Button>
                 </TableCell>
               </TableRow>
             ))}
-
           </TableBody>
         </Table>
       </div>
