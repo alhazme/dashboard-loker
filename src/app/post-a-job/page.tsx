@@ -46,7 +46,8 @@ const PostJob: FC<PostJobProps> = ({ }) => {
   const form = useForm<z.infer<typeof jobFormSchema>>({
     resolver: zodResolver(jobFormSchema),
     defaultValues: {
-      requiredSkills: []
+      requiredSkills: [],
+      benefits: []
     }
   })
 
