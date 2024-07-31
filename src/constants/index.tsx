@@ -31,3 +31,12 @@ export const JOB_LISTING_DATA = [
     needs: 10
   }
 ]
+
+export const JOB_APPLICANT_COLUMNS: string[] = ['Name', 'Applied Date']
+
+export const JOB_APPLICANT_DATA = [
+  {
+    name: "Fariz",
+    appliedDate: "15 Aug 2023"
+  }
+]
