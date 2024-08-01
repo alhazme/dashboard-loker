@@ -6,12 +6,22 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
-import { LOCATION_OPTIONS, optionType } from '@/constants'
+import { EMPLOYEE_OPTIONS, INDUSTRY_OPTIONS, LOCATION_OPTIONS, optionType } from '@/constants'
+import { Calendar } from "@/components/ui/calendar"
+import { format } from "date-fns"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import { overviewFormSchema } from '@/lib/form-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React, { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import { CalendarIcon } from 'lucide-react'
 
 interface OverviewFormProps {
 
@@ -43,6 +53,7 @@ const OverviewForm: FC<OverviewFormProps> = ({  }) => {
           </FieldInput>
           <FieldInput title='Company Details' subtitle='Introduce Your Company core info quickly to users by fill up company details'>
             <div className='space-y-5'>
+              { /* Name */ }
               <FormField
                 control={form.control}
                 name="name"
@@ -56,6 +67,7 @@ const OverviewForm: FC<OverviewFormProps> = ({  }) => {
                   </FormItem>
                 )}
               />
+              { /* Website */ }
               <FormField
                 control={form.control}
                 name="website"
@@ -63,12 +75,13 @@ const OverviewForm: FC<OverviewFormProps> = ({  }) => {
                   <FormItem>
                     <FormLabel>Website</FormLabel>
                     <FormControl>
-                      <Input className="w-[450px]" placeholder="Twitter" {...field} />
+                      <Input className="w-[450px]" placeholder="https://twitter.com" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              { /* Location */ }
               <FormField
                 control={form.control}
                 name="location"
@@ -87,6 +100,97 @@ const OverviewForm: FC<OverviewFormProps> = ({  }) => {
                         ))}
                       </SelectContent>
                     </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              { /* Employee and Industry */ }
+              <div className='w-[450px] grid grid-cols-2 gap-4'>
+                { /* Employee */ }
+                <FormField
+                  control={form.control}
+                  name="employee"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Employee</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Employee" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          { EMPLOYEE_OPTIONS.map((item: optionType, i: number) => (
+                            <SelectItem key={ item.id + i } value={ item.id }>{ item.label }</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                { /* Industry */ }
+                <FormField
+                  control={form.control}
+                  name="industry"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Industry</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Industry" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          { INDUSTRY_OPTIONS.map((item: optionType, i: number) => (
+                            <SelectItem key={ item.id + i } value={ item.id }>{ item.label }</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              { /* Date Founded */ }
+              <FormField
+                control={form.control}
+                name="dateFounded"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Date Founded</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "w-[450px] pl-3 text-left font-normal",
+                              !field.value && "text-muted-foreground"
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, "ppp")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          disabled={(date) =>
+                            date > new Date() || date < new Date("1900-01-01")
+                          }
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
                     <FormMessage />
                   </FormItem>
                 )}
