@@ -1,7 +1,18 @@
 import { EnumValues } from "zod";
 import { benefitType } from "./types";
 
-export const JOBTYPES: EnumValues = ['Full-Time', 'Part-Time', 'Remote', 'Internship'];
+export type optionType = {
+  id: string,
+  label: string
+}
+
+export const JOBTYPES: EnumValues = [
+  'Full-Time',
+  'Part-Time',
+  'Remote',
+  'Internship'
+];
+
 export const BENEFITS: benefitType[] = [
 	{
 		benefit: "Full Healthcare",
@@ -32,11 +43,33 @@ export const JOB_LISTING_DATA = [
   }
 ]
 
-export const JOB_APPLICANT_COLUMNS: string[] = ['Name', 'Applied Date']
+export const JOB_APPLICANT_COLUMNS: string[] = [
+  'Name',
+  'Applied Date'
+]
 
 export const JOB_APPLICANT_DATA = [
   {
     name: "Fariz",
     appliedDate: "15 Aug 2023"
+  }
+]
+
+export const LOCATION_OPTIONS: optionType[] = [
+  {
+    id: 'Indonesia',
+    label: 'Indonesia'
+  },
+  {
+    id: 'Malaysia',
+    label: 'Malaysia'
+  },
+  {
+    id: 'Singapura',
+    label: 'Singapura'
+  },
+  {
+    id: 'Thailand',
+    label: 'Thailand'
   }
 ]
