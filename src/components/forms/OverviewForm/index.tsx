@@ -16,25 +16,37 @@ import {
 } from "@/components/ui/popover"
 import { overviewFormSchema } from '@/lib/form-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { CalendarIcon } from 'lucide-react'
+import InputSkills from '@/components/organisms/InputSkills'
+import CKEditor from '@/components/organisms/CKEditor'
 
 interface OverviewFormProps {
 
 }
 
 const OverviewForm: FC<OverviewFormProps> = ({  }) => {
+
+  const [editorLoaded, setEditorLoaded] = useState<boolean>(false);
+
   const form = useForm<z.infer<typeof overviewFormSchema>>({
     resolver: zodResolver(overviewFormSchema),
+    defaultValues: {
+      techStack: []
+    },
   });
 
   const onSubmit =(val: z.infer<typeof overviewFormSchema>) => {
     console.log(val)
   }
+
+  useEffect(() => {
+    setEditorLoaded(true);
+  }, [])
 
   return (
     <div>
@@ -48,11 +60,16 @@ const OverviewForm: FC<OverviewFormProps> = ({  }) => {
 
       <Form { ...form }>
         <form onSubmit={ form.handleSubmit(onSubmit) } className='space-y-7'>
+
+          { /* Company Logo */ }
           <FieldInput title="Company Logo" subtitle='This iamg will be show publicly as company logo'>
             <CustomUpload form={ form } name="image" />
           </FieldInput>
+
+          { /* Company Benefits */ }
           <FieldInput title='Company Details' subtitle='Introduce Your Company core info quickly to users by fill up company details'>
             <div className='space-y-5'>
+
               { /* Name */ }
               <FormField
                 control={form.control}
@@ -67,6 +84,7 @@ const OverviewForm: FC<OverviewFormProps> = ({  }) => {
                   </FormItem>
                 )}
               />
+
               { /* Website */ }
               <FormField
                 control={form.control}
@@ -81,6 +99,7 @@ const OverviewForm: FC<OverviewFormProps> = ({  }) => {
                   </FormItem>
                 )}
               />
+
               { /* Location */ }
               <FormField
                 control={form.control}
@@ -104,6 +123,7 @@ const OverviewForm: FC<OverviewFormProps> = ({  }) => {
                   </FormItem>
                 )}
               />
+
               { /* Employee and Industry */ }
               <div className='w-[450px] grid grid-cols-2 gap-4'>
                 { /* Employee */ }
@@ -153,6 +173,7 @@ const OverviewForm: FC<OverviewFormProps> = ({  }) => {
                   )}
                 />
               </div>
+
               { /* Date Founded */ }
               <FormField
                 control={form.control}
@@ -195,8 +216,20 @@ const OverviewForm: FC<OverviewFormProps> = ({  }) => {
                   </FormItem>
                 )}
               />
+
+              { /* Tech Stack */ }
+              <InputSkills form={ form } name="techStack" label="Add Tech Stack" />
             </div>
           </FieldInput>
+
+          { /* About Company */ }
+          <FieldInput title='About Company' subtitle='Brief description for your company. URLs are hyperlinked'>
+            <CKEditor form={ form } name="description" editorLoaded={ editorLoaded } />
+          </FieldInput>
+
+          <div className='flex justify-end'>
+            <Button size="lg">Save Changes</Button>
+          </div>
         </form>
       </Form>
     </div>
