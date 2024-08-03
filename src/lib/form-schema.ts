@@ -1,6 +1,20 @@
 import { JOBTYPES } from '@/constants'
 import {z} from 'zod'
 
+export const signInFormSchema = z.object({
+  email: z
+    .string({ required_error: 'Email is required' })
+    .email({ message: 'Email is not valid' }),
+  password: z.string({ required_error: 'Password is required' })
+})
+
+export const signUpFormSchema = z.object({
+  email: z
+    .string({ required_error: 'Email is required' })
+    .email({ message: 'Email is not valid' }),
+  password: z.string({ required_error: 'Password is required' })
+})
+
 export const jobFormSchema = z.object({
   roles: z
     .string({ required_error: 'Job Title is required' })
